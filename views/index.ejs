@@ -1,0 +1,15 @@
+<%- include ("partials/header") -%>
+
+<h1>Typet - Typing Game!</h1>
+<h3 id="timer">start typing to start the timer</h3>
+<div class="container">
+<div class="timer">
+</div>
+<p style="display: none;" class="noOfWords"><%= noOfWords %></p>
+<p class="typingContent"><%= typingContent %></p>
+</div>
+<div class="restart-center">
+    <button name="restart" value="submit" class="restart">restart</button>
+</div>
+
+<%- include ("partials/footer") -%>

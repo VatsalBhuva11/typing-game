@@ -1,0 +1,66 @@
+body{
+    background-color: rgb(37, 39, 40);
+}
+
+h1{
+    font-size: 4rem;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-family: 'Victor Mono', monospace;
+    margin-top: 50px;
+}
+
+#timer{
+    color:rgb(233, 191, 75);
+    text-align: center;
+    margin-top: 75px;
+    font-size: 4rem;
+}
+
+.typingContent{
+    color: rgb(117, 116, 114);
+    font-size: 2rem;
+}
+
+.container{
+    margin-top: 75px;
+    text-align: center;
+    height: 250px;
+    overflow: scroll;
+    scroll-behavior: smooth;
+
+}
+
+.container::-webkit-scrollbar{
+    display: none;
+  }
+
+.correct{
+    color:aliceblue;
+}
+
+.wrong{
+    color: rgb(241, 64, 64);
+}
+
+#wpm{
+    color:rgb(233, 191, 75);
+}
+
+.restart{
+    border: none;
+    font-size: 1.5rem;
+    color:rgb(57, 56, 56);
+    background-color: gray;
+    border-radius: 10px;
+}
+
+.restart-center{
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+
+.restart:hover{
+    background-color: rgb(189, 189, 189);
+}
