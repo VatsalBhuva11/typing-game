@@ -60,7 +60,7 @@ $(document).keypress(function(event){
         textIndex++;
     
     }
-    console.log(textIndex%80);
+    // console.log(textIndex%80);
     if (textIndex % 80 === 0){
         $('.container').scrollTop(60);
     }
