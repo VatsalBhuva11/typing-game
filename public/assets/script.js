@@ -1,4 +1,6 @@
-let time_limit = 30;
+let time_limit = Number($('#initialTime').text());
+$('#'+time_limit).css("color", "orange");
+
 const totalTime = time_limit;
 let flag = 1;
 let textIndex = 0;
@@ -8,7 +10,6 @@ let newTextArray = [];
 //when backspace done, accordingly modify the count of correct letters typed and wrong letters typed
 let checkCorrectOrWrong = [];
 let correct = 0, wrong = 0, total = 0;
-
 let stopTime;
 
 $(document).keypress(function(event){
@@ -24,7 +25,8 @@ $(document).keypress(function(event){
                 let grossWPM = words/mins;
                 let netWPM = grossWPM - wrong/mins;
                 netWPM = Math.round(netWPM);
-                $("#timer").text("Your speed is "+netWPM+" WPM!");
+                let accuracy = Math.round(correct/total*100);
+                $("#timer").text("Speed: "+netWPM+" WPM, Accuracy: "+accuracy+"%");
                 clearInterval(stopTime);
             } else {
                 if (time_limit < 10) {
@@ -43,14 +45,20 @@ $(document).keypress(function(event){
     let modifiedCharCSS = ""
 
     if (time_limit >= 0){
+        if (newTextArray.length >= 1){
+            let last = $('.typingContent > span').slice(-1)[0];
+            last.classList.remove("caret");
+            newTextArray.pop();
+            newTextArray.push(last.outerHTML);
+        }
         if (userTypedKey === actualKey){
-            modifiedCharCSS = "<span class = 'correct'>"+userTypedKey+"</span>";
+            modifiedCharCSS = "<span class = 'caret correct'>"+userTypedKey+"</span>";
             newTextArray.push(modifiedCharCSS);
             checkCorrectOrWrong.push("correct");
             correct++;
         }
         else{
-            modifiedCharCSS = "<span class = 'wrong'>"+actualKey+"</span>";
+            modifiedCharCSS = "<span class = 'caret wrong'>"+actualKey+"</span>";
             newTextArray.push(modifiedCharCSS);
             checkCorrectOrWrong.push("wrong");
             wrong++;
@@ -58,11 +66,11 @@ $(document).keypress(function(event){
         total++;
         $('.typingContent').html(newTextArray.join('') + typingText.slice(textIndex+1));
         textIndex++;
-    
     }
-    // console.log(textIndex%80);
+
+    console.log(textIndex % 80);
     if (textIndex % 80 === 0){
-        $('.container').scrollTop(60);
+        $('.container').scrollTop(60 * (textIndex/80));
     }
 })
 
@@ -72,15 +80,22 @@ $(document).keyup(function(e){
         if (newTextArray.length >= 0){
             newTextArray.pop();
             textIndex--;
+            if (newTextArray.length >= 1){
+                let last = $('.typingContent > span').slice(-2)[0];
+                last.classList.add("caret");
+                newTextArray.pop();
+                newTextArray.push(last.outerHTML);
+            }
             if (checkCorrectOrWrong.pop() === "correct"){
                 correct--;
             }
             else{
                 wrong--;
             }
+            total--;
             $('.typingContent').html(newTextArray.join('') + typingText.slice(textIndex));
         }
-
+        
     }
 })  
 
@@ -88,15 +103,15 @@ $(document).keyup(function(e){
 $(".restart").on("click", function(){
     //stop the ongoing timer; start new timer when key pressed again
     clearInterval(stopTime);
-    time_limit = 30;
+    time_limit = totalTime;
     flag = 1;
     textIndex = 0;
     newTextArray = [];
+    checkCorrectOrWrong = [];
     correct = 0, wrong = 0, total = 0;
     $('.typingContent').html(typingText);
     $("#timer").text('start typing to start the time');
-
-    
+        
     const { activeElement } = document;
     
     if (activeElement) {
@@ -104,7 +119,5 @@ $(".restart").on("click", function(){
     }
 })
 
+// 
 
-
-//scroll every 80 letters, right now only once it is scrolling
-//add blinking cursor

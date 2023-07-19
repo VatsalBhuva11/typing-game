@@ -1,7 +1,14 @@
 <%- include ("partials/header") -%>
 
 <h1>Typet - Typing Game!</h1>
+<div class="timeOptions">
+    <a href="/15" id="15">15s</a>
+    <a href="/30" id="30">30s</a>
+    <a href="/60" id="60">60s</a>
+    <a href="/120" id="120">120s</a>
+</div>
 <h3 id="timer">start typing to start the timer</h3>
+<p id="initialTime" style="display: none;"><%= initialTime %></p>
 <div class="container">
 <div class="timer">
 </div>

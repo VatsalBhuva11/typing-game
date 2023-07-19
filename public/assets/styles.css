@@ -10,6 +10,22 @@ h1{
     margin-top: 50px;
 }
 
+.timeOptions{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    gap: 30px;
+}
+
+.timeOptions > *{
+    text-decoration: none;
+    color: gray;
+}
+
+a:hover{
+    color: rgb(81, 81, 81);
+}
+
 #timer{
     color:rgb(233, 191, 75);
     text-align: center;
@@ -28,7 +44,7 @@ h1{
     height: 250px;
     overflow: scroll;
     scroll-behavior: smooth;
-
+    position: relative;
 }
 
 .container::-webkit-scrollbar{
@@ -63,4 +79,25 @@ h1{
 
 .restart:hover{
     background-color: rgb(189, 189, 189);
+}
+
+.caret{
+    border-right: 2px solid rgb(241, 206, 34);
+}
+
+footer{
+    color: rgb(188, 187, 184);
+    font-size: 1rem;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: rgb(24, 23, 23);
+    padding: 15px;
+}
+
+footer > div > p{
+    padding: 0;
+    margin: 0;
 }
