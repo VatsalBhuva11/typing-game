@@ -81,9 +81,20 @@ a:hover{
     background-color: rgb(189, 189, 189);
 }
 
-.caret{
-    border-right: 2px solid rgb(241, 206, 34);
+@keyframes example {
+    from {border-right: 1px solid rgb(241, 206, 34);}
+    to {border: none;}
 }
+
+/* The element to apply the animation to */
+.caret {
+    animation-name: example;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    box-sizing: border-box;
+  }
+
+
 
 footer{
     color: rgb(188, 187, 184);

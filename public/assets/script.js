@@ -92,7 +92,6 @@ $(document).keyup(function(e){
             else{
                 wrong--;
             }
-            total--;
             $('.typingContent').html(newTextArray.join('') + typingText.slice(textIndex));
         }
         
@@ -109,6 +108,7 @@ $(".restart").on("click", function(){
     newTextArray = [];
     checkCorrectOrWrong = [];
     correct = 0, wrong = 0, total = 0;
+    $('.container').animate({ scrollTop: 0 }, "fast");
     $('.typingContent').html(typingText);
     $("#timer").text('start typing to start the time');
         
