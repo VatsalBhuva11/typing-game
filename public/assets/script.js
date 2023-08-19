@@ -6,7 +6,7 @@ let flag = 1;
 let textIndex = 0;
 let typingText = $('.typingContent').text();
 //add stylized letters to this array, join the letters and display. array to add backspace functionality
-let newTextArray = [];
+let newTextArray = ["<span class='caret'>typingText[0]</span>"];
 //when backspace done, accordingly modify the count of correct letters typed and wrong letters typed
 let checkCorrectOrWrong = [];
 let correct = 0, wrong = 0, total = 0;
@@ -62,28 +62,33 @@ let actualKey = typingText[textIndex];
     let modifiedCharCSS = ""
 
     if (time_limit >= 0){
-        if (newTextArray.length >= 0){
-            let last = $('.typingContent > span').slice(-1)[0];
-            last.classList.remove("caret");
-            newTextArray.pop();
-            newTextArray.push(last.outerHTML);
+        if (typingIndex === 0){
+            $('.typingContent').html(newTextArray.join('') + typingText.slice(textIndex+1));
+        } else {
+            if (newTextArray.length >= 1){
+                let last = $('.typingContent > span').slice(-1)[0];
+                last.classList.remove("caret");
+                newTextArray.pop();
+                newTextArray.push(last.outerHTML);
+            }
+            if (userTypedKey === actualKey){
+                modifiedCharCSS = "<span class = 'caret correct'>"+userTypedKey+"</span>";
+                newTextArray.push(modifiedCharCSS);
+                checkCorrectOrWrong.push("correct");
+                correct++;
+            }
+            else{
+                modifiedCharCSS = "<span class = 'caret wrong'>"+actualKey+"</span>";
+                newTextArray.push(modifiedCharCSS);
+                checkCorrectOrWrong.push("wrong");
+                wrong++;
+            }
+            total++;
+            $('.typingContent').html(newTextArray.join('') + typingText.slice(textIndex+1));
+            textIndex++;
+            }
         }
-        if (userTypedKey === actualKey){
-            modifiedCharCSS = "<span class = 'caret correct'>"+userTypedKey+"</span>";
-            newTextArray.push(modifiedCharCSS);
-            checkCorrectOrWrong.push("correct");
-            correct++;
-        }
-        else{
-            modifiedCharCSS = "<span class = 'caret wrong'>"+actualKey+"</span>";
-            newTextArray.push(modifiedCharCSS);
-            checkCorrectOrWrong.push("wrong");
-            wrong++;
-        }
-        total++;
-        $('.typingContent').html(newTextArray.join('') + typingText.slice(textIndex+1));
-        textIndex++;
-    }
+        
 
     if (textIndex % 80 === 0){
         $('.container').scrollTop(60 * (textIndex/80));
