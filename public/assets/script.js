@@ -1,3 +1,5 @@
+const { text } = require("express");
+
 let time_limit = Number($('#initialTime').text());
 $('#'+time_limit).css("color", "orange");
 
@@ -61,10 +63,11 @@ let userTypedKey = event.originalEvent.key
 let actualKey = typingText[textIndex];
     let modifiedCharCSS = ""
 
+    if (textIndex === 0){
+        $('.typingContent').html(newTextArray.join('') + typingText.slice(textIndex+1));
+    }
     if (time_limit >= 0){
-        if (textIndex === 0){
-            $('.typingContent').html(newTextArray.join('') + typingText.slice(textIndex+1));
-        } else {
+          {
             if (newTextArray.length >= 1){
                 let last = $('.typingContent > span').slice(-1)[0];
                 last.classList.remove("caret");
