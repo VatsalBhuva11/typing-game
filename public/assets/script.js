@@ -15,33 +15,50 @@ let stopTime;
 $(document).keypress(function(event){
     if (flag){
         flag = 0;
-        $("#timer").html("00:" + time_limit);
+        if (totalTime > 60){
+            let newTime = time_limit - 60;
+            if (newTime < 10) {
+                $("#timer").html("01:0" + time_limit);
+            }
+            else{
+                $("#timer").html("01:" + newTime);
+            }
+        }
+        else{
+            $("#timer").html("00:" + time_limit);
+        }
         time_limit -= 1;
         stopTime = setInterval(() => {
             if (time_limit == 0) {
-                // $("#timer").html("Time Over");
                 let mins = totalTime/60;
                 let words = total/5;
+                let correctWPM = (correct/5)/mins;
                 let grossWPM = words/mins;
                 let netWPM = grossWPM - wrong/mins;
                 netWPM = Math.round(netWPM);
                 let accuracy = Math.round(correct/total*100);
                 $("#timer").text("Speed: "+netWPM+" WPM, Accuracy: "+accuracy+"%");
-                clearInterval(stopTime);
+                clearInterval(stopTime);    
             } else {
                 if (time_limit < 10) {
-                    time_limit = 0 + "" + time_limit;
+                    $("#timer").html("00:0" + time_limit);
                 }
-                
-                $("#timer").html("00:" + time_limit);
-                
+                else{
+                    if (time_limit > 60){
+                        let newTime = time_limit - 60;
+                        $("#timer").html("01:" + newTime);
+                    }
+                    else{
+                        $("#timer").html("00:" + time_limit);
+                    }
+                }            
             }
             time_limit -= 1;
         }, 1000);
-    }
-    // console.log(typingText[startingLetter]);
-    let userTypedKey = event.originalEvent.key
-    let actualKey = typingText[textIndex];
+}
+// console.log(typingText[startingLetter]);
+let userTypedKey = event.originalEvent.key
+let actualKey = typingText[textIndex];
     let modifiedCharCSS = ""
 
     if (time_limit >= 0){
@@ -110,7 +127,27 @@ $(".restart").on("click", function(){
     correct = 0, wrong = 0, total = 0;
     $('.container').animate({ scrollTop: 0 }, "fast");
     $('.typingContent').html(typingText);
-    $("#timer").text('start typing to start the time');
+    $("#timer").text('start typing to start the timer');
+        
+    const { activeElement } = document;
+    
+    if (activeElement) {
+        activeElement.blur();
+    }
+})
+
+$(".retry").on("click", function(){
+    //stop the ongoing timer; start new timer when key pressed again
+    clearInterval(stopTime);
+    time_limit = totalTime;
+    flag = 1;
+    textIndex = 0;
+    newTextArray = [];
+    checkCorrectOrWrong = [];
+    correct = 0, wrong = 0, total = 0;
+    $('.container').animate({ scrollTop: 0 }, "fast");
+    $('.typingContent').html(typingText);
+    $("#timer").text('start typing to start the timer');
         
     const { activeElement } = document;
     

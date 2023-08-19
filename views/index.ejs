@@ -16,7 +16,10 @@
 <p class="typingContent"><%= typingContent %></p>
 </div>
 <div class="restart-center">
-    <button name="restart" value="submit" class="restart">restart</button>
+    <form action="/restart" method="post">
+        <button name="restart" class="restart">restart</button>
+    </form>
+    <button name="retry" class="restart" style="margin-left: 20px;">retry</button>
 </div>
 
 <%- include ("partials/footer") -%>

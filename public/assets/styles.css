@@ -88,11 +88,12 @@ a:hover{
 
 /* The element to apply the animation to */
 .caret {
-    animation-name: example;
+    /* animation-name: example;
     animation-duration: 1s;
     animation-iteration-count: infinite;
-    box-sizing: border-box;
-  }
+    box-sizing: border-box; */
+    background-color: rgb(91, 91, 82);
+}
 
 
 
@@ -111,4 +112,8 @@ footer{
 footer > div > p{
     padding: 0;
     margin: 0;
+}
+
+span{
+    box-sizing: border-box;
 }
