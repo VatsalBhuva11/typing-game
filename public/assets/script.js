@@ -64,6 +64,8 @@ let actualKey = typingText[textIndex];
     if (time_limit >= 0){
         if (newTextArray.length >= 1){
             let last = $('.typingContent > span').slice(-1)[0];
+            console.log(last);
+            console.log($('.typingContent > span'));
             last.classList.remove("caret");
             newTextArray.pop();
             newTextArray.push(last.outerHTML);
@@ -85,7 +87,6 @@ let actualKey = typingText[textIndex];
         textIndex++;
     }
 
-    console.log(textIndex % 80);
     if (textIndex % 80 === 0){
         $('.container').scrollTop(60 * (textIndex/80));
     }
