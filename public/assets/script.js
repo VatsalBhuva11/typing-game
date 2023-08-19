@@ -62,10 +62,8 @@ let actualKey = typingText[textIndex];
     let modifiedCharCSS = ""
 
     if (time_limit >= 0){
-        if (newTextArray.length >= 1){
+        if (newTextArray.length >= 0){
             let last = $('.typingContent > span').slice(-1)[0];
-            console.log(last);
-            console.log($('.typingContent > span'));
             last.classList.remove("caret");
             newTextArray.pop();
             newTextArray.push(last.outerHTML);
@@ -94,8 +92,8 @@ let actualKey = typingText[textIndex];
 
 $(document).keyup(function(e){
     //backspace
-    if(e.keyCode == 8){
-        if (newTextArray.length >= 0){
+    if(e.keyCode == 8 && newTextArray.length >= 0){
+        
             newTextArray.pop();
             textIndex--;
             if (newTextArray.length >= 1){
@@ -111,7 +109,7 @@ $(document).keyup(function(e){
                 wrong--;
             }
             $('.typingContent').html(newTextArray.join('') + typingText.slice(textIndex));
-        }
+        
         
     }
 })  
