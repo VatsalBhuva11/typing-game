@@ -6,7 +6,7 @@ let flag = 1;
 let textIndex = 0;
 let typingText = $('.typingContent').text();
 //add stylized letters to this array, join the letters and display. array to add backspace functionality
-let newTextArray = ["<span class='caret'>typingText[0]</span>"];
+let newTextArray = ["<span class='caret'>"+typingText[0]+"</span>"];
 //when backspace done, accordingly modify the count of correct letters typed and wrong letters typed
 let checkCorrectOrWrong = [];
 let correct = 0, wrong = 0, total = 0;
