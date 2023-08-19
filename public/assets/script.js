@@ -62,7 +62,7 @@ let actualKey = typingText[textIndex];
     let modifiedCharCSS = ""
 
     if (time_limit >= 0){
-        if (typingIndex === 0){
+        if (textIndex === 0){
             $('.typingContent').html(newTextArray.join('') + typingText.slice(textIndex+1));
         } else {
             if (newTextArray.length >= 1){
