@@ -10,6 +10,64 @@ h1{
     margin-top: 50px;
 }
 
+.bi-person{
+    filter: invert(100%);
+}
+
+.align-login-image{
+    position: absolute;
+    right: 80px;
+    top: 90px;
+    text-align: center;
+}
+
+.align-login-image > p{
+    color: rgb(125, 122, 122);
+}
+
+.center-register-login{
+    display: flex;
+    justify-content: center;
+    color: gray;
+    gap: 50px;
+    margin-top: 100px;
+}
+
+.center-register-login > div{
+    width: 35%;
+    text-align: center;
+}
+.center-register-login > div p{
+    margin: 0;
+}
+
+.center-register-login > div > form{
+    margin-bottom: 15px;
+}
+
+.center-register-login input{
+    width: 90%;
+    background-color: #2c2e31;
+    border: none;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    color: rgb(194, 191, 191);
+}
+
+
+
+.center-register-login button{
+    background-color: #2c2e31;
+    border:none;
+    border-radius: 10px;
+    padding: 10px;
+    color: rgb(213, 211, 211);  
+    width: 40%;
+    margin: 20px;
+}
+
+
 .timeOptions{
     display: flex;
     justify-content: center;

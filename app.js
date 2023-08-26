@@ -1,3 +1,4 @@
+require("dotenv").config
 const express = require("express");
 const app = express();
 const https = require("https");
@@ -25,9 +26,13 @@ app.get("/", (req, res) => {
     res.render("index", {typingContent: sentence, noOfWords: noOfWords, initialTime: 30});
 })
 
-app.get("/:time", function(req, res){
+app.get("/options/:time", function(req, res){
     let time = req.params.time;
     res.render("index", {typingContent: sentence, noOfWords: noOfWords, initialTime: Number(time)});
+})
+
+app.get("/register-login", function(req, res){
+    res.render("reg-or-log");
 })
 
 app.post("/restart", (req, res)=>{
@@ -43,6 +48,6 @@ app.post("/restart", (req, res)=>{
     })
 })
 
-app.listen(process.env.PORT || 8000, function(){
+app.listen(3000, function(){
     console.log("Listening on port "+process.env.PORT+"...");
 })

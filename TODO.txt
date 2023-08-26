@@ -1,0 +1,1 @@
+1) add ctrl+backspace option (basically add word class for each word immediately after API call)
