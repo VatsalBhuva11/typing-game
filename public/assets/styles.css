@@ -41,6 +41,10 @@ h1{
     margin: 0;
 }
 
+.center-register-login > span{
+    float: right;
+}
+
 .center-register-login > div > form{
     margin-bottom: 15px;
 }
@@ -55,6 +59,11 @@ h1{
     color: rgb(194, 191, 191);
 }
 
+.center-register-login a{
+    text-decoration: none;
+    color: rgb(125, 122, 122);
+}
+
 
 
 .center-register-login button{
@@ -67,6 +76,15 @@ h1{
     margin: 20px;
 }
 
+.center-register-login button:hover{
+    background-color: #1c1c1d;
+    
+}
+
+.reg-log-message{
+    text-align: center;
+    color: rgb(125, 122, 122);
+}
 
 .timeOptions{
     display: flex;
