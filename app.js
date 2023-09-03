@@ -6,6 +6,7 @@ const nodemailer = require('nodemailer');
 const jwt = require("jsonwebtoken");
 const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
+const PORT = 8000;
 
 const mongoose = require("mongoose");
 
@@ -33,20 +34,28 @@ const transporter = nodemailer.createTransport({
         clientSecret: process.env.CLIENT_SECRET,
         refreshToken: process.env.REFRESH_TOKEN,
         accessToken: accessToken
-    }
+    },
+    proxy: {
+        host: '172.31.2.3', // Replace with your proxy server's address
+        port: 8080, // Replace with your proxy server's port
+        auth: {
+          username: 'IIT2022004', // Replace with your proxy username
+          password: 'Cristianocr7#', // Replace with your proxy password
+        },
+      }
 });
 
 let noOfWords = 200;
 let sentence = ""
 
-// https.get("https://random-word-api.vercel.app/api?words="+noOfWords, function(response){
-//     response.on('data', (data) => {
-//         var formattedData = JSON.parse(data);
-//         for (let i = 0; i<noOfWords; i++){
-//             sentence += formattedData[i]+" ";
-//         }
-//     });
-// })
+https.get("https://random-word-api.vercel.app/api?words="+noOfWords, function(response){
+    response.on('data', (data) => {
+        var formattedData = JSON.parse(data);
+        for (let i = 0; i<noOfWords; i++){
+            sentence += formattedData[i]+" ";
+        }
+    });
+})
 
 
 app.get("/", (req, res) => {
@@ -74,7 +83,8 @@ app.post("/register", function(req, res){
             from: process.env.EMAIL_USERNAME,
             to: email,
             subject: 'Email verification',
-            text: 'That was easy!'
+            text: 'That was easy!',
+            html: `<h1>Click the link below to verify your account!</h1></hr><a href="http://localhost:${PORT}/user/verifyToken">Verify Account</a>`
           };
         transporter.sendMail(mailOptions, function(error, info){
             if (error) {
@@ -88,19 +98,23 @@ app.post("/register", function(req, res){
     }
 })
 
-// app.post("/restart", (req, res)=>{
-//     sentence = ""
-//     https.get("https://random-word-api.vercel.app/api?words="+noOfWords, function(response){
-//         response.on('data', (data) => {
-//             var formattedData = JSON.parse(data);
-//             for (let i = 0; i<noOfWords; i++){
-//                 sentence += formattedData[i]+" ";
-//             }
-//         });
-//         res.redirect("/")
-//     })
-// })
+app.get("/user/verifyToken", (req, res)=>{
+    res.send("Successfully verified!");
+})
 
-app.listen(8000, function(){
+app.post("/restart", (req, res)=>{
+    sentence = ""
+    https.get("https://random-word-api.vercel.app/api?words="+noOfWords, function(response){
+        response.on('data', (data) => {
+            var formattedData = JSON.parse(data);
+            for (let i = 0; i<noOfWords; i++){
+                sentence += formattedData[i]+" ";
+            }
+        });
+        res.redirect("/")
+    })
+})
+
+app.listen(PORT, function(){
     console.log("Listening on port "+process.env.PORT+"...");
 })
