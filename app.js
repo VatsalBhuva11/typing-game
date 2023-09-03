@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 const oauth2Client = new OAuth2(
     process.env.CLIENT_ID, // ClientID
     process.env.CLIENT_SECRET, // Client Secret
-    "https://developers.google.com/oauthplayground" // Redirect URL
+    process.env.REDIRECT_URI // Redirect URL
 );
 oauth2Client.setCredentials({
     refresh_token: process.env.REFRESH_TOKEN
@@ -28,7 +28,7 @@ const transporter = nodemailer.createTransport({
     secure: true,
     auth: {
         type: 'OAuth2',
-        user: 'vatsalbhuva11@gmail.com',
+        user: process.env.EMAIL_USERNAME,
         clientId: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
         refreshToken: process.env.REFRESH_TOKEN,
@@ -76,7 +76,7 @@ app.post("/register", function(req, res){
             subject: 'Email verification',
             text: 'That was easy!'
           };
-          transporter.sendMail(mailOptions, function(error, info){
+        transporter.sendMail(mailOptions, function(error, info){
             if (error) {
                 console.log(error);
                 res.render("reg-or-log", {message: "Could not send email for verification."})
@@ -84,7 +84,7 @@ app.post("/register", function(req, res){
                 console.log('Email sent: ' + info.response);
                 res.render("reg-or-log", {message: "Successfully sent email for verification."})
             }
-          });
+        });
     }
 })
 
@@ -101,6 +101,6 @@ app.post("/register", function(req, res){
 //     })
 // })
 
-app.listen(3000, function(){
+app.listen(8000, function(){
     console.log("Listening on port "+process.env.PORT+"...");
 })
