@@ -81,9 +81,35 @@ h1{
     
 }
 
+.go-back{
+    position: absolute;
+    left: 50px;    
+}
+
+.go-back > a{
+    text-decoration: none;
+    color: rgb(233, 191, 75);
+    font-family: 'Victor Mono', monospace;
+}
+
 .reg-log-message{
     text-align: center;
     color: rgb(125, 122, 122);
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+}
+
+.verification-msg{
+    margin-top: 50px;
+    color:rgb(233, 191, 75);
+    font-family: 'Victor Mono', monospace;
+}
+
+.btn-link {
+    background-color: red;
 }
 
 .timeOptions{
